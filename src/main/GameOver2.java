@@ -16,13 +16,15 @@ public class GameOver2 extends Form implements CommandListener{
 	private static String highSName[], highSScore[]; //this will be the list of high score names and scores in String representation.
 	private static int highSValue[]; //this is the list of high score values in integer representation.
 	private static String name;
+	private Command exit;
+	private mainMIDlet m;
 	
-	public GameOver2(String title, int playerScore, String playerName) {
+	public GameOver2(String title, int playerScore, String playerName, mainMIDlet m) {
 		super(title);
 		// TODO Auto-generated constructor stub
 		score=playerScore;
 		name=playerName;
-		
+		this.m = m;
 		highSName= new String[11];
 		highSScore= new String[11];
 		highSValue= new int[11];
@@ -70,6 +72,9 @@ public class GameOver2 extends Form implements CommandListener{
 			closeRecStore (db); //then we close the record store.
 			} catch (Exception e) {System.out.println (e);} 
 		
+			exit = new Command("EXIT",Command.EXIT,1);
+			this.addCommand(exit);
+			this.setCommandListener(this);
 	}
 	
 	private static void getHighScores () {
@@ -171,8 +176,15 @@ public class GameOver2 extends Form implements CommandListener{
 	}
 
 	public void commandAction(Command c, Displayable d) {
-		// TODO Auto-generated method stub
-		
+			
+			String label = c.getLabel();
+			if(d.equals(this))
+			{
+				System.out.println(label);
+				if("EXIT".equals(label)) {
+					m.notifyDestroyed();
+				}
+			}
 	}
 	
 	private static void giveStatus()

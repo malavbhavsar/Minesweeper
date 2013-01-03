@@ -47,13 +47,13 @@ public class GameOver extends Form implements CommandListener{
 			
 			if(i<0)
 			{
-				gameOver2=new GameOver2("High Scores",i,"none");
+				gameOver2=new GameOver2("High Scores",i,"none",m);
 				Display dis= Display.getDisplay(m);
 				dis.setCurrent(gameOver2);
 			}
 			if(i>0 && !("".equals(textField.getString())))
 			{
-				gameOver2=new GameOver2("High Scores",i,textField.getString());
+				gameOver2=new GameOver2("High Scores",i,textField.getString(),m);
 				Display dis= Display.getDisplay(m);
 				dis.setCurrent(gameOver2);
 			}
